@@ -1,0 +1,159 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 40px;
+
+  position: absolute;
+  width: 450px;
+  height: auto;
+  left: calc(50% - 450px / 2 - 0.5px);
+  top: 138px;
+
+  border: 2px solid;
+
+  border-image-source: linear-gradient(
+    121.86deg,
+    #ffffff 5.23%,
+    rgba(255, 255, 255, 0) 41.9%
+  );
+
+  background: linear-gradient(
+    110.97deg,
+    rgba(255, 255, 255, 0.5) -4.87%,
+    rgba(255, 255, 255, 0) 103.95%
+  );
+  backdrop-filter: blur(40px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 24px;
+}
+
+.loginHeader {
+  font-family: Faktum;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin: 10px 0px;
+}
+
+.loginBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 10px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 10px 0px;
+}
+
+.loginIcon {
+  margin-right: 10px;
+}
+
+.thirdpartyauthButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 40px;
+  margin: 10px 0px;
+
+  position: relative;
+  width: 100%;
+  display: inline-block;
+
+  font-family: Faktum;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  /* B&N/White */
+
+  background: rgba(255, 255, 255, 0.906) 20.95%;
+
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(40px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 12px;
+}
+
+.division {
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  margin: 30px 0px;
+  background: rgba(255, 255, 255, 0.577) 41.9%;
+}
+
+.loginInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  border-radius: 12px;
+  width: 100%;
+  margin: 10px 0px;
+}
+
+.loginButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 40px;
+  margin: 10px 0px;
+
+  position: relative;
+  width: 100%;
+  display: inline-block;
+
+  font-family: Faktum;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(40px);
+
+  border-radius: 12px;
+}
+
+
+.loginForgotPassword{
+  font-family: Faktum;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin: 10px 0px;
+}
+
+.loginNeedAccount{
+  font-family: Faktum;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin: 10px 0px;
+}

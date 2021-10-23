@@ -1,0 +1,10 @@
+.color-nav {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.603) 0%,
+    rgba(255, 255, 255, 0) 133.32%,
+    rgba(0, 0, 0, 0.335) 133.33%
+  );
+  backdrop-filter: blur(40px);
+  /* Note: backdrop-filter has minimal browser support */
+}
