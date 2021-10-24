@@ -1,0 +1,150 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  padding: 30px 20px 30px 20px;
+
+  position: relative;
+  width: auto;
+  height: auto;
+
+  border: 2px solid;
+  border-radius: 24px;
+
+  border-image-source: linear-gradient(
+    121.86deg,
+    #ffffff 5.23%,
+    rgba(255, 255, 255, 0) 41.9%
+  );
+
+  background: linear-gradient(
+    110.97deg,
+    rgba(255, 255, 255, 0.5) -4.87%,
+    rgba(255, 255, 255, 0) 103.95%
+  );
+  backdrop-filter: blur(40px);
+  font-family: Faktum;
+}
+.title {
+  font-family: Faktum;
+  font-size: 18px;
+  font-style: normal;
+  width: 100%;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.amountContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+}
+
+.amountDropdown {
+  display: flex;
+  width: 100%;
+  grid-template-areas: "dropdown  input";
+  grid-template-columns: 1fr 1fr;
+}
+
+.cardDropdown {
+  grid-area: dropdown;
+  cursor: pointer;
+  margin-right: 1rem;
+  height: 50px;
+  width: 90px;
+  padding-left: 10px;
+  color: black;
+  background-color: #0000000d;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+}
+
+.input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.errorDisplay {
+  grid-area: error;
+  width: 100%;
+  margin-top: 0.5rem;
+  color:  red;
+}
+
+.button {
+  padding: 10px 40px;
+  margin-top: 30px;
+
+  position: relative;
+  width: fit-content;
+  display: inline-block;
+
+  font-family: Faktum;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(40px);
+  border-radius: 12px;
+
+  
+}
+
+@media (max-width: 900px) {
+  .amountContainer {
+    display: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: auto;
+    column-gap: 10px;
+  }
+}
+
+.popupButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 40px;
+  margin: 10px 0px;
+
+  position: relative;
+  width: 100%;
+  display: inline-block;
+
+  font-family: Faktum;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(40px);
+
+  border-radius: 12px;
+}

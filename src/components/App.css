@@ -1,10 +1,11 @@
 .App {
       background-image: url("../images/background.png");
-      background-repeat: no-repeat, repeat;
+      background-repeat: no-repeat;
       background-position: top; /* Center the image */
       background-size: cover; /* Resize the background image to cover the entire container */
       background-color: #cccccc;
-      height: 100vh; /* You must set a specified height */
+      padding-bottom: 30px;
+      min-height: 100vh; /* You must set a specified height */
 
   }
   

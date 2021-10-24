@@ -1,0 +1,52 @@
+.wrapper {
+    width: 100%;
+    max-width: 960px;
+    margin: 30px auto;
+  }
+  .flex-container {
+    display: grid;
+    grid-template-areas: "balanceDisplay  dashboardOptions";
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 20px;
+    margin: 0px 1rem;
+  
+  }
+  
+  .balanceDisplayLocation {
+    grid-area: balanceDisplay;
+    max-width: 375px;
+  }
+  
+  .dashboardOptionsLocation {
+    grid-area: dashboardOptions;
+    max-width: 700px;
+  }
+  
+  @media (max-width: 700px) {
+    .wrapper {
+      width: auto;
+      max-width: 100%;
+      margin: 30px 1rem;
+    }
+    .flex-container {
+      display: wrap;
+      grid-template-areas:
+        "balanceDisplay"
+        "dashboardOptions";
+      grid-template-columns: 1fr;
+      grid-gap: 20px;
+    }
+  
+    .balanceDisplayLocation {
+      grid-area: balanceDisplay;
+      max-width: 375px;
+      justify-self: center;
+    }
+  
+    .dashboardOptionsLocation {
+      grid-area: dashboardOptions;
+      width: auto;
+      justify-self: center;
+    }
+  }
+  

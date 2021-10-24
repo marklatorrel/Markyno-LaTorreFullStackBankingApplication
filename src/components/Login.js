@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { googleProvider } from "../config/authMethods";
-import "./Login.css";
+import styles from "./Login.module.css";
 import GoogleIcon from "../icons/google-icon.svg";
 import FacebookIcon from "../icons/facebook-icon.svg";
 import AppleIcon from "../icons/apple-icon.svg";
@@ -43,58 +43,58 @@ export default function Login() {
 
   return (
     <>
-      <div className="login">
-        <div className="loginHeader"> Log in to the bank</div>
-        <div className="loginBody">
+      <div className={styles.popup}>
+        <div className={styles.popupHeader}> Log in to the bank</div>
+        <div className={styles.popupBody}>
           <button
-            className="thirdpartyauthButton"
+            className={styles.thirdpartyauthButton}
             disabled={loading}
             onClick={() => handleOnClick(googleProvider)}
           >
-            <img className="loginIcon" alt="google" src={GoogleIcon}></img>
+            <img className={styles.popupIcon} alt="google" src={GoogleIcon}></img>
             Continue with Google
           </button>
           <button
-            className="thirdpartyauthButton"
+            className={styles.thirdpartyauthButton}
             disabled={loading}
             onClick={() => handleOnClick(googleProvider)}
           >
-            <img className="loginIcon" alt="facebook" src={FacebookIcon}></img>
+            <img className={styles.popupIcon} alt="facebook" src={FacebookIcon}></img>
             Continue with Facebook
           </button>
           <button
-            className="thirdpartyauthButton"
+            className={styles.thirdpartyauthButton}
             disabled={loading}
             onClick={() => handleOnClick(googleProvider)}
           >
-            <img className="loginIcon" alt="apple" src={AppleIcon}></img>
+            <img className={styles.popupIcon} alt="google" src={AppleIcon}></img>
             Continue with Apple
           </button>
-          <div className="division"></div>
+          <div className={styles.division}></div>
           <input
-            className="loginInput"
+            className={styles.popupInput}
             placeholder="Email"
             type="email"
             ref={emailRef}
             required
           ></input>
           <input
-            className="loginInput"
+            className={styles.popupInput}
             placeholder="Password"
             type="password"
             ref={passwordRef}
             required
           ></input>
           <button
-            className="loginButton"
+            className={styles.popupButton}
             disabled={loading}
             onClick={() => handleLogIn()}
           >
             Log In
           </button>
-          <p className="loginForgotPassword">Forgot password?</p>
-          <div className="division"></div>
-          <p className="loginNeedAccount">
+          <p className={styles.popupForgotPassword}>Forgot password?</p>
+          <div className={styles.division}></div>
+          <p className={styles.popupNeedAccount}>
             Need an account? <Link to="/signup">Sign Up</Link>
           </p>
         </div>

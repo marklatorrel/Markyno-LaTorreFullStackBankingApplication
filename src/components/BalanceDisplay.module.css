@@ -1,0 +1,74 @@
+.balanceDisplay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px 0px 20px;
+
+  position: relative;
+  width: 260px;
+  height: auto;
+
+  border: 2px solid;
+  border-radius: 24px;
+
+  border-image-source: linear-gradient(
+    121.86deg,
+    #ffffff 5.23%,
+    rgba(255, 255, 255, 0) 41.9%
+  );
+
+  background: linear-gradient(
+    110.97deg,
+    rgba(255, 255, 255, 0.5) -4.87%,
+    rgba(255, 255, 255, 0) 103.95%
+  );
+  backdrop-filter: blur(40px);
+}
+.title {
+  font-family: Faktum;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.accountInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  width: auto;
+  margin-bottom: 30px;
+}
+
+.displayMoney {
+  font-family: Faktum;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 33px;
+  margin: 0px;
+}
+.displayAccount {
+  font-family: Faktum;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 10px 0px 0px 0px;
+}
+.displayAccountNumber {
+  font-family: Faktum;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin: 10px 0px 0px 0px;
+}

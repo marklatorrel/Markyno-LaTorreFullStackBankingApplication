@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import {
   Card,
   Button,
@@ -10,24 +10,28 @@ import {
   Col,
 } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link } from "react-router-dom";
 import { db } from "../firebase";
+import styles from "./Deposit.module.css";
+import BalanceDisplay from "./BalanceDisplay";
+import DepositWithdrawTemplate from "./DepositWidrawTemplate";
 
 export default function Deposit() {
-  const [value, setValue] = useState(0);
+  const changedAmount = useRef(0);
   const { currentUser, user, setUser } = useAuth();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!value) return;
-    if (isNaN(value)) {
+  function handleSubmit() {
+    //e.preventDefault();
+    console.log("Entered the handle submit")
+    console.log(changedAmount.current.value)
+    if (!changedAmount.current.value) return;
+    if (isNaN(changedAmount.current.value)) {
       alert("Write numbers only");
       return;
-    } else if (value < 0) {
+    } else if (changedAmount.current.value < 0) {
       alert("Write a positive number");
       return;
     }
-    let newBalance = user.balance + parseInt(value);
+    let newBalance = user.balance + parseInt(changedAmount.current.value);
     db.collection("users").doc(currentUser.uid).update({
       balance: newBalance,
     });
@@ -42,87 +46,16 @@ export default function Deposit() {
   };
 
   return (
-    <div>
-      <Row xs={1} md={2} className="g-4">
-        <Col md={4}>
-          <Container
-            className="align-items-center justify-content-center"
-            style={{ marginTop: "40px" }}
-          >
-            <Container
-              style={{
-                border: "2px solid gray",
-                marginTop: "40px",
-                backgroundColor: "#CFCCC8",
-                borderRadius: 10,
-              }}
-            >
-              <Row
-                className="align-items-center justify-content-center"
-                style={{ marginTop: "20px" }}
-              >
-                <h6>Your current balance is</h6>
-              </Row>
-              <Row className="align-items-center justify-content-center">
-                <h3>${user.balance}</h3>
-              </Row>
-              <Row className="align-items-center justify-content-center">
-                <b>{user.rewardPoints} reward points </b>
-              </Row>
-              <Row
-                className="align-items-center justify-content-center"
-                style={{
-                  marginBottom: "15px",
-                }}
-              >
-                <p>USD account number: {user.accountNumber} </p>
-              </Row>
-            </Container>
-          </Container>{" "}
-        </Col>
-        <Col md={8}>
-          <Container
-            className=" align-items-center justify-content-center"
-            style={{ minHeight: "10vh" }}
-          >
-            <Col style={{ marginTop: "40px" }}>
-              <Link to="/">Regresar</Link>
-            </Col>
-            <Col>
-              <Card
-                className="w-100"
-                style={{
-                  minWidth: "400px",
-                  marginTop: "10px",
-                }}
-              >
-                <Card.Header>Deposit</Card.Header>
-                <Card.Body>
-                  <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                      <Form.Label>
-                        ¿How much would you like to deposit?
-                      </Form.Label>
-                      <InputGroup className="mb-3">
-                        <InputGroup.Text>$</InputGroup.Text>
-                        <FormControl
-                          type="text"
-                          className="input"
-                          placeholder="Add an amount"
-                          onChange={(e) => setValue(e.target.value)}
-                        />
-                      </InputGroup>
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                      Deposit
-                    </Button>
-                  </Form>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Container>
-        </Col>
-      </Row>
+    <div className={styles.wrapper}>
+      <div className={styles["flex-container"]}>
+        <div className={styles.balanceDisplayLocation}>
+          <BalanceDisplay></BalanceDisplay>
+        </div>
+        <div className={styles.dashboardOptionsLocation}>
+        <DepositWithdrawTemplate handleFunction={()=>handleSubmit()} amount={changedAmount} err="Mensaje"></DepositWithdrawTemplate>
+
+        </div>
+      </div>
     </div>
   );
 }

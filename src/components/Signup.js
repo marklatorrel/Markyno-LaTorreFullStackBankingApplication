@@ -3,6 +3,10 @@ import { Form, Button, Card, Alert, Container, Row } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { googleProvider } from "../config/authMethods";
+import styles from "./Signup.module.css";
+import GoogleIcon from "../icons/google-icon.svg";
+import FacebookIcon from "../icons/facebook-icon.svg";
+import AppleIcon from "../icons/apple-icon.svg";
 
 export default function Signup() {
   const emailRef = useRef();
@@ -14,11 +18,13 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSingin() {
+    //e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
+      alert("Passwords do not match");
+      return 
+      //return setError("Passwords do not match");
     }
 
     try {
@@ -51,55 +57,76 @@ export default function Signup() {
 
   return (
     <>
-      <Container
-        className=" align-items-center justify-content-center"
-        style={{ marginTop: "50px" }}
-      >
-        <Row className="justify-content-center">
-          <Card style={{ minWidth: "300px" }}>
-            <Card.Body>
-              <h2 className="text-center mb-4">Sign Up</h2>
-              <Button
-                disabled={loading}
-                onClick={() => handleOnClick(googleProvider)}
-                className="w-100"
-                type="submit"
-              >
-                Sign up with Google
-              </Button>
-              {error && <Alert variant="danger">{error}</Alert>}
-              <Form onSubmit={handleSubmit}>
-                <Form.Group id="name">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control type="name" ref={nameRef} required />
-                </Form.Group>
-                <Form.Group id="email">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" ref={emailRef} required />
-                </Form.Group>
-                <Form.Group id="password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" ref={passwordRef} required />
-                </Form.Group>
-                <Form.Group id="password-confirm">
-                  <Form.Label>Password Confirmation</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={passwordConfirmRef}
-                    required
-                  />
-                </Form.Group>
-                <Button disabled={loading} className="w-100" type="submit">
-                  Sign Up
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Row>
-      </Container>
-
-      <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
+      <div className={styles.popup}>
+        <div className={styles.popupHeader}> Sign up to Stratton Oakmont Bank</div>
+        <div className={styles.popupBody}>
+          <button
+            className={styles.thirdpartyauthButton}
+            disabled={loading}
+            onClick={() => handleOnClick(googleProvider)}
+          >
+            <img className={styles.popupIcon} alt="google" src={GoogleIcon}></img>
+            Continue with Google
+          </button>
+          <button
+            className={styles.thirdpartyauthButton}
+            disabled={loading}
+            onClick={() => handleOnClick(googleProvider)}
+          >
+            <img className={styles.popupIcon} alt="facebook" src={FacebookIcon}></img>
+            Continue with Facebook
+          </button>
+          <button
+            className={styles.thirdpartyauthButton}
+            disabled={loading}
+            onClick={() => handleOnClick(googleProvider)}
+          >
+            <img className={styles.popupIcon} alt="apple" src={AppleIcon}></img>
+            Continue with Apple
+          </button>
+          <div className={styles.division}></div>
+          <p className={styles.miniHeader}>Sign up using email</p>
+          <input
+            className={styles.popupInput}
+            placeholder="Name"
+            type="name"
+            ref={nameRef}
+            required
+          ></input>
+          <input
+            className={styles.popupInput}
+            placeholder="Email"
+            type="email"
+            ref={emailRef}
+            required
+          ></input>
+          <input
+            className={styles.popupInput}
+            placeholder="Password"
+            type="password"
+            ref={passwordRef}
+            required
+          ></input>
+          <input
+            className={styles.popupInput}
+            placeholder="Password Confirmation"
+            type="password"
+            ref={passwordConfirmRef}
+            required
+          ></input>
+          <button
+            className={styles.popupButton}
+            disabled={loading}
+            onClick={() => handleSingin()}
+          >
+            Sign Up
+          </button>
+          <p className={styles.popupTermsOfSeervice}>At signing up you accept our <Link to="/signup">Terms of Service</Link></p>
+          <div className={styles.division}></div>
+          <p className={styles.popupNeedAccount}>
+            Already have an account? <Link to="/login">Log In</Link>
+          </p>
+        </div>
       </div>
     </>
   );
