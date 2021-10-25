@@ -1,14 +1,4 @@
-import React, { useState, useRef } from "react";
-import {
-  Card,
-  Button,
-  Form,
-  InputGroup,
-  FormControl,
-  Row,
-  Container,
-  Col,
-} from "react-bootstrap";
+import React, {useRef, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import styles from "./Deposit.module.css";
@@ -17,7 +7,15 @@ import DepositWithdrawTemplate from "./DepositWidrawTemplate";
 
 export default function Deposit() {
   const changedAmount = useRef(0);
-  const { currentUser, user, setUser } = useAuth();
+  const { currentUser, user, setUser, getUserInfo } = useAuth();
+
+  useEffect(() => {
+    if(!user.name){
+      console.log("No encontro usuario y entro")
+      getUserInfo();
+    }
+  }, []);
+
 
   function handleSubmit() {
     //e.preventDefault();
@@ -31,7 +29,7 @@ export default function Deposit() {
       alert("Write a positive number");
       return;
     }
-    let newBalance = user.balance + parseInt(changedAmount.current.value);
+    let newBalance = user.balance + parseInt(changedAmount.current.value*100);
     db.collection("users").doc(currentUser.uid).update({
       balance: newBalance,
     });

@@ -12,7 +12,7 @@ export default function DepositWithdrawTemplate(props) {
         <div className={styles.amountContainer}>
           <div className={styles.amountDropdown}>
             <select className={styles.cardDropdown} id="plan">
-              <option value="USD" selected>
+              <option value="USD" defaultValue>
                 USD
               </option>
               <option value="EUR">EUR</option>
