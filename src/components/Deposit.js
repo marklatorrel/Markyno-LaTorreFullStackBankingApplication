@@ -1,4 +1,4 @@
-import React, {useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import styles from "./Deposit.module.css";
@@ -10,38 +10,49 @@ export default function Deposit() {
   const { currentUser, user, setUser, getUserInfo } = useAuth();
 
   useEffect(() => {
-    if(!user.name){
-      console.log("No encontro usuario y entro")
-      getUserInfo();
+    if (user.name === "-") {
+       getUserInfo();
+       console.log("Entro al user info")
     }
   }, []);
 
+  useEffect(() => {
+       console.log("Entro al use effect del user ", user)
+  }, [user]);
 
-  function handleSubmit() {
-    //e.preventDefault();
+   function handleDeposit() {
+   // e.preventDefault();
     console.log("Entered the handle submit")
-    console.log(changedAmount.current.value)
-    if (!changedAmount.current.value) return;
-    if (isNaN(changedAmount.current.value)) {
-      alert("Write numbers only");
-      return;
-    } else if (changedAmount.current.value < 0) {
-      alert("Write a positive number");
-      return;
-    }
-    let newBalance = user.balance + parseInt(changedAmount.current.value*100);
-    db.collection("users").doc(currentUser.uid).update({
-      balance: newBalance,
+    // console.log(changedAmount.current.value)
+    // if (!changedAmount.current.value) return;
+    // if (isNaN(changedAmount.current.value)) {
+    //   alert("Write numbers only");
+    //   return;
+    // } else if (changedAmount.current.value < 0) {
+    //   alert("Write a positive number");
+    //   return;
+    // }
+     let newBalance = user.account[0].balance + parseInt(changedAmount.current.value*100);
+     db.collection("users").doc(currentUser.uid).update(
+      { 
+        "account.0.currency": user.account[0].currency,
+        "account.0.balance": newBalance,
+        "account.0.accountNumber": user.account[0].accountNumber,
+        "account.1.currency": user.account[1].currency,
+        "account.1.balance": user.account[1].balance,
+        "account.1.accountNumber": user.account[1].accountNumber,
+      }
+    );
+
+
+    setUser((user) => {
+      
+      let useTem = {...user};
+      useTem.account[0].balance=newBalance;
+     return useTem;
     });
+  }
 
-    setUser((user) => ({
-      ...user,
-      balance: newBalance
-    }));
-
-
-    alert("Succesfull Deposit");
-  };
 
   return (
     <div className={styles.wrapper}>
@@ -50,8 +61,13 @@ export default function Deposit() {
           <BalanceDisplay></BalanceDisplay>
         </div>
         <div className={styles.dashboardOptionsLocation}>
-        <DepositWithdrawTemplate handleFunction={()=>handleSubmit()} amount={changedAmount} err="Mensaje"></DepositWithdrawTemplate>
-
+          <DepositWithdrawTemplate
+            title="How much would you like to deposit"
+            buttonText="Deposit"
+            handleFunction={() => handleDeposit()}
+            amount={changedAmount}
+            err="Mensaje"
+          ></DepositWithdrawTemplate>
         </div>
       </div>
     </div>

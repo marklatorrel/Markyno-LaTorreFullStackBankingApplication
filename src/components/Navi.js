@@ -44,7 +44,7 @@ export default function Navi() {
             <Nav.Link
               style={{ color: "#FFFFFF" }}
             >
-              {user.name}
+             {user.name}
             </Nav.Link>
           )}
           {currentUser && (

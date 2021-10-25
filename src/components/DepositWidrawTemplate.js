@@ -5,10 +5,11 @@ import styles from "./DepositWithdrawTemplate.module.css";
 
 export default function DepositWithdrawTemplate(props) {
   const { user } = useAuth();
+  
   return (
     <>
       <div className={styles.card}>
-        <div className={styles.title}>How much would you like to deposit?</div>
+        <div className={styles.title}> {props.title}</div>
         <div className={styles.amountContainer}>
           <div className={styles.amountDropdown}>
             <select className={styles.cardDropdown} id="plan">
@@ -28,7 +29,7 @@ export default function DepositWithdrawTemplate(props) {
           <div className={styles.errorDisplay}>{props.err}</div>
         </div>
         <button className={styles.button}
-        onClick={()=>props.handleFunction()}> Deposit</button>
+        onClick={()=>props.handleFunction()}> {props.buttonText}</button>
       </div>
     </>
   );

@@ -5,10 +5,11 @@ import DashboardOptions from "./DashboardOptions";
 import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
-  const { user, getUserInfo } = useAuth();
+  const { user, getUserInfo,getUserAccount } = useAuth();
 
   useEffect(() => {
     getUserInfo();
+    //getUserAccount();
   }, []);
 
   return (
