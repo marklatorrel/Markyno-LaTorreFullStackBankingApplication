@@ -82,6 +82,10 @@
   box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(40px);
 }
+.button:hover{
+  background: rgba(99, 98, 98, 0.274);
+
+}
 
 @media (max-width: 900px) {
   .buttonContainer {

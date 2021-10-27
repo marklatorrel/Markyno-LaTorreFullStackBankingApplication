@@ -19,18 +19,14 @@ export default function DashboardOptions() {
           <Link to="/deposit">
             <button
               className={styles.button}
-              //disabled={loading}
-              //onClick={() => handleOnClick(googleProvider)}
             >
               <img className={styles.icon} alt="google" src={DepositIcon}></img>
               Deposit money
             </button>
           </Link>
-          <Link to="/deposit">
+          <Link to="/withdraw">
             <button
               className={styles.button}
-              //disabled={loading}
-              //onClick={() => handleOnClick(googleProvider)}
             >
               <img
                 className={styles.icon}
@@ -43,8 +39,6 @@ export default function DashboardOptions() {
           <Link to="/withdraw">
             <button
               className={styles.button}
-              //disabled={loading}
-              //onClick={() => handleOnClick(googleProvider)}
             >
               <img
                 className={styles.icon}
