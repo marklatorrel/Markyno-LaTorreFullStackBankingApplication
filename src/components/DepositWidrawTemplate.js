@@ -30,7 +30,8 @@ export default function DepositWithdrawTemplate(props) {
               required
             ></input>
           </div>
-          <div className={styles.errorDisplay}>{props.err}</div>
+          {props.err && < div className={styles.errorDisplay}>{props.err}</div>}
+          {props.success && < div className={styles.errorDisplay}>{props.success}</div>}
         </div>
         <button
           className={styles.button}

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
@@ -8,41 +8,82 @@ import DepositWithdrawTemplate from "./DepositWidrawTemplate";
 
 export default function Withdraw() {
   const changedAmount = useRef(0);
-  const { currentUser, user, setUser } = useAuth();
+  const changedCurrency = useRef("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const { currentUser, user, setUser, getUserInfo } = useAuth();
 
-  const handleWithdraw = () => {
-    // e.preventDefault();
-    if (!changedAmount.current.value) return;
-    if (changedAmount.current.value > user.account[0].balance) {
-      alert("Insufficient money");
-      return;
-    } else if (isNaN(changedAmount.current.value)) {
-      alert("Write numbers only");
-      return;
-    } else if (changedAmount.current.value < 0) {
-      alert("Write positive numbers only");
-      return;
+  useEffect(() => {
+    if (user.name === "-") {
+      getUserInfo();
     }
+  }, []);
 
-    let newBalance =
-      user.account[0].balance - parseInt(changedAmount.current.value * 100);
+  function validateInputAmount() {
 
-    db.collection("users").doc(currentUser.uid).update({
-      "account.0.currency": user.account[0].currency,
-      "account.0.balance": newBalance,
-      "account.0.accountNumber": user.account[0].accountNumber,
-      "account.1.currency": user.account[1].currency,
-      "account.1.balance": user.account[1].balance,
-      "account.1.accountNumber": user.account[1].accountNumber,
-    });
+    console.log("The amount is " + changedAmount.current.value + " The currency is " + changedAmount.current.value );
+    if (!changedAmount.current.value) return false;
+    if (changedAmount.current.value <= 0) {
+      setError("Write a positive number");
+      return false;
+    } else if (
+      changedCurrency.current.value === "USD" &&
+      changedAmount.current.value*100 >= user.account[0].balance
+    ) {
+      console.log("Entro atrás")
+      setError("Insuficcient funds");
+      return false;
+    } else if (
+      changedCurrency.current.value === "EUR" &&
+      changedAmount.current.value*100 >= user.account[1].balance
+    ) {
+      setError("Insuficcient funds");
+      return false;
+    } else return true;
+  }
 
-    setUser((user) => {
-      let useTem = { ...user };
-      useTem.account[0].balance = newBalance;
-      return useTem;
-    });
-    alert("Succesfull Withdraw");
-  };
+  function handleWithdraw() {
+    setSuccessMessage("")
+
+    if (validateInputAmount() !== false) {
+      let newBalance = 0;
+
+      if (changedCurrency.current.value === "USD") {
+        newBalance =
+          user.account[0].balance - parseInt(changedAmount.current.value * 100);
+        db.collection("users").doc(currentUser.uid).update({
+          "account.0.currency": user.account[0].currency,
+          "account.0.balance": newBalance,
+          "account.0.accountNumber": user.account[0].accountNumber,
+          "account.1.currency": user.account[1].currency,
+          "account.1.balance": user.account[1].balance,
+          "account.1.accountNumber": user.account[1].accountNumber,
+        }).then(setSuccessMessage("Succesfull USD withdraw"));
+      } else if (changedCurrency.current.value === "EUR") {
+        newBalance =
+          user.account[1].balance - parseInt(changedAmount.current.value * 100);
+        db.collection("users").doc(currentUser.uid).update({
+          "account.0.currency": user.account[0].currency,
+          "account.0.balance": user.account[0].balance,
+          "account.0.accountNumber": user.account[0].accountNumber,
+          "account.1.currency": user.account[1].currency,
+          "account.1.balance": newBalance,
+          "account.1.accountNumber": user.account[1].accountNumber,
+        }).then(setSuccessMessage("Succesfull EUR withdraw"));
+      }
+
+      setError("");
+      console.log("Entro al" + changedCurrency.current.value);
+
+      setUser((user) => {
+        let useTem = { ...user };
+        if (changedCurrency.current.value === "USD") {
+          useTem.account[0].balance = newBalance;
+        } else useTem.account[1].balance = newBalance;
+        return useTem;
+      });
+    }
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -58,8 +99,10 @@ export default function Withdraw() {
             title="How much would you like to withdraw"
             buttonText="Withdraw"
             handleFunction={() => handleWithdraw()}
+            tempCurrency={changedCurrency}
             amount={changedAmount}
-            err="Mensaje"
+            err={error}
+            success={successMessage}
           ></DepositWithdrawTemplate>
         </div>
       </div>
