@@ -20,22 +20,26 @@ export default function Withdraw() {
   }, []);
 
   function validateInputAmount() {
-
-    console.log("The amount is " + changedAmount.current.value + " The currency is " + changedAmount.current.value );
+    console.log(
+      "The amount is " +
+        changedAmount.current.value +
+        " The currency is " +
+        changedAmount.current.value
+    );
     if (!changedAmount.current.value) return false;
     if (changedAmount.current.value <= 0) {
       setError("Write a positive number");
       return false;
     } else if (
       changedCurrency.current.value === "USD" &&
-      changedAmount.current.value*100 >= user.account[0].balance
+      changedAmount.current.value * 100 >= user.account[0].balance
     ) {
-      console.log("Entro atrás")
+      console.log("Entro atrás");
       setError("Insuficcient funds");
       return false;
     } else if (
       changedCurrency.current.value === "EUR" &&
-      changedAmount.current.value*100 >= user.account[1].balance
+      changedAmount.current.value * 100 >= user.account[1].balance
     ) {
       setError("Insuficcient funds");
       return false;
@@ -43,43 +47,64 @@ export default function Withdraw() {
   }
 
   function handleWithdraw() {
-    setSuccessMessage("")
+    setSuccessMessage("");
 
     if (validateInputAmount() !== false) {
       let newBalance = 0;
+      let tempAccountHistory = [];
+
 
       if (changedCurrency.current.value === "USD") {
         newBalance =
           user.account[0].balance - parseInt(changedAmount.current.value * 100);
-        db.collection("users").doc(currentUser.uid).update({
-          "account.0.currency": user.account[0].currency,
-          "account.0.balance": newBalance,
-          "account.0.accountNumber": user.account[0].accountNumber,
-          "account.1.currency": user.account[1].currency,
-          "account.1.balance": user.account[1].balance,
-          "account.1.accountNumber": user.account[1].accountNumber,
-        }).then(setSuccessMessage("Succesfull USD withdraw"));
+         tempAccountHistory = user.account[0].accountHistory;
+        tempAccountHistory.push(parseInt(changedAmount.current.value * -100));
+        db.collection("users")
+          .doc(currentUser.uid)
+          .update({
+            "account.0.currency": user.account[0].currency,
+            "account.0.balance": newBalance,
+            "account.0.accountNumber": user.account[0].accountNumber,
+            "account.0.accountHistory": tempAccountHistory,
+            "account.1.currency": user.account[1].currency,
+            "account.1.balance": user.account[1].balance,
+            "account.1.accountNumber": user.account[1].accountNumber,
+            "account.1.accountHistory": user.account[1].accountHistory,
+          })
+          .then(setSuccessMessage("Succesfull USD withdraw"));
       } else if (changedCurrency.current.value === "EUR") {
         newBalance =
-          user.account[1].balance - parseInt(changedAmount.current.value * 100);
-        db.collection("users").doc(currentUser.uid).update({
-          "account.0.currency": user.account[0].currency,
-          "account.0.balance": user.account[0].balance,
-          "account.0.accountNumber": user.account[0].accountNumber,
-          "account.1.currency": user.account[1].currency,
-          "account.1.balance": newBalance,
-          "account.1.accountNumber": user.account[1].accountNumber,
-        }).then(setSuccessMessage("Succesfull EUR withdraw"));
+          user.account[1].balance - parseInt(changedAmount.current.value * -100);
+         tempAccountHistory = user.account[1].accountHistory;
+
+        tempAccountHistory.push(parseInt(changedAmount.current.value * 100));
+        db.collection("users")
+          .doc(currentUser.uid)
+          .update({
+            "account.0.currency": user.account[0].currency,
+            "account.0.balance": user.account[0].balance,
+            "account.0.accountNumber": user.account[0].accountNumber,
+            "account.0.accountHistory": user.account[0].accountHistory,
+            "account.1.currency": user.account[1].currency,
+            "account.1.balance": newBalance,
+            "account.1.accountNumber": user.account[1].accountNumber,
+            "account.1.accountHistory": tempAccountHistory,
+          })
+          .then(setSuccessMessage("Succesfull EUR withdraw"));
       }
 
       setError("");
       console.log("Entro al" + changedCurrency.current.value);
 
+
       setUser((user) => {
         let useTem = { ...user };
         if (changedCurrency.current.value === "USD") {
           useTem.account[0].balance = newBalance;
-        } else useTem.account[1].balance = newBalance;
+          useTem.account[0].accountHistory = tempAccountHistory;
+
+        } else {useTem.account[1].balance = newBalance;
+          useTem.account[1].accountHistory = tempAccountHistory;}
         return useTem;
       });
     }
@@ -93,7 +118,7 @@ export default function Withdraw() {
         </div>
         <div className={styles.dashboardOptionsLocation}>
           <Link to="/">
-            <p className={styles.text}> Regresar</p>
+            <p className={styles.text}>Back</p>
           </Link>
           <DepositWithdrawTemplate
             title="How much would you like to withdraw"

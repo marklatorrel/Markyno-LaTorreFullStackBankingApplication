@@ -35,6 +35,7 @@ export default function Signup() {
         passwordRef.current.value,
         nameRef.current.value
       );
+      alert("New user created");
       history.push("/");
     } catch {
       setError("Failed to create an account");
@@ -49,6 +50,7 @@ export default function Signup() {
       setLoading(true);
       const res = await socialMediaLogIn(provider);
       console.log(res);
+      alert("New user created");
       history.push("/");
     } catch {
       setError("Failed to log in");
@@ -67,22 +69,6 @@ export default function Signup() {
           >
             <img className={styles.popupIcon} alt="google" src={GoogleIcon}></img>
             Continue with Google
-          </button>
-          <button
-            className={styles.thirdpartyauthButton}
-            disabled={loading}
-            onClick={() => handleOnClick(googleProvider)}
-          >
-            <img className={styles.popupIcon} alt="facebook" src={FacebookIcon}></img>
-            Continue with Facebook
-          </button>
-          <button
-            className={styles.thirdpartyauthButton}
-            disabled={loading}
-            onClick={() => handleOnClick(googleProvider)}
-          >
-            <img className={styles.popupIcon} alt="apple" src={AppleIcon}></img>
-            Continue with Apple
           </button>
           <div className={styles.division}></div>
           <p className={styles.miniHeader}>Sign up using email</p>

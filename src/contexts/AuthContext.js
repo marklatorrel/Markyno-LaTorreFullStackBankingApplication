@@ -13,15 +13,17 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState({
     name: "-",
     account: [
-      {
+      { 
         currency: "-",
         balance: 0,
         accountNumber: "-",
+        accountHistory: [0]
       },
       {
         currency: "-",
         balance: 0,
         accountNumber: "-",
+        accountHistory: [0]
       },
     ],
   });
@@ -60,11 +62,13 @@ export function AuthProvider({ children }) {
               currency: "USD",
               balance: 0,
               accountNumber: "101" + new Date().getTime().toString(),
+              accountHistory: [0]
             },
             {
               currency: "EUR",
               balance: 0,
               accountNumber: "102" + new Date().getTime().toString(),
+              accountHistory: [0]
             },
           ],
         });
@@ -95,11 +99,13 @@ export function AuthProvider({ children }) {
                   currency: "USD",
                   balance: 0,
                   accountNumber: "101" + new Date().getTime().toString(),
+                  accountHistory: [0]
                 },
                 {
                   currency: "EUR",
                   balance: 0,
                   accountNumber: "102" + new Date().getTime().toString(),
+                  accountHistory: [0]
                 },
               ],
             });

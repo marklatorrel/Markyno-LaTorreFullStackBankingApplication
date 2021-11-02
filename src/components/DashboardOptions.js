@@ -36,7 +36,7 @@ export default function DashboardOptions() {
               Withdraw money
             </button>
           </Link>
-          <Link to="/withdraw">
+          <Link to="/accounthistory">
             <button
               className={styles.button}
             >

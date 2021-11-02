@@ -54,22 +54,6 @@ export default function Login() {
             <img className={styles.popupIcon} alt="google" src={GoogleIcon}></img>
             Continue with Google
           </button>
-          <button
-            className={styles.thirdpartyauthButton}
-            disabled={loading}
-            onClick={() => handleOnClick(googleProvider)}
-          >
-            <img className={styles.popupIcon} alt="facebook" src={FacebookIcon}></img>
-            Continue with Facebook
-          </button>
-          <button
-            className={styles.thirdpartyauthButton}
-            disabled={loading}
-            onClick={() => handleOnClick(googleProvider)}
-          >
-            <img className={styles.popupIcon} alt="google" src={AppleIcon}></img>
-            Continue with Apple
-          </button>
           <div className={styles.division}></div>
           <input
             className={styles.popupInput}

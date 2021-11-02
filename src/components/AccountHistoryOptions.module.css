@@ -1,0 +1,112 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px 30px 20px;
+  
+    position: relative;
+    width: auto;
+    height: auto;
+  
+    border: 2px solid;
+    border-radius: 24px;
+  
+    border-image-source: linear-gradient(
+      121.86deg,
+      #ffffff 5.23%,
+      rgba(255, 255, 255, 0) 41.9%
+    );
+  
+    background: linear-gradient(
+      110.97deg,
+      rgba(255, 255, 255, 0.5) -4.87%,
+      rgba(255, 255, 255, 0) 103.95%
+    );
+    backdrop-filter: blur(40px);
+  }
+  .title {
+    font-family: Faktum;
+    font-size: 18px;
+    font-style: normal;
+    width: 100%;
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 30px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: auto;
+    column-gap: 10px;
+    margin: 0px 1rem ;
+  }
+  
+  
+  .button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 10px 0px;
+    gap: 10px;
+    position: relative;
+    width: auto;
+    min-width: 170px;
+    border: 0px solid;
+    border-radius: 24px;
+  
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(40px);
+  }
+  .button:hover{
+    background: rgba(99, 98, 98, 0.274);
+  
+  }
+
+
+  .buttonTitle{
+    font-family: Faktum;
+    font-size: 1rem;
+    font-style: normal;
+    width: 100%;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin: 0px
+  }
+
+  .buttonAccount{
+    font-family: Faktum;
+    font-size: 0.9rem;
+    font-style: normal;
+    width: 100%;
+    font-weight: normal;
+    line-height: 1rem;
+    letter-spacing: 0em;
+    text-align: left;
+    margin: 0px
+
+  }
+  
+  @media (max-width: 900px) {
+    .buttonContainer {
+      display: wrap;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: fit-content;
+      width: auto;
+      column-gap: 10px;
+    }
+  }
+  
