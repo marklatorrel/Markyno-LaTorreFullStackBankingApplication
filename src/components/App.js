@@ -7,8 +7,6 @@ import Login from "./Login";
 import Deposit from "./Deposit";
 import Withdraw from "./Withdraw";
 import PrivateRoute from "./PrivateRoute";
-import ForgotPassword from "./ForgotPassword";
-import UpdateProfile from "./UpdateProfile";
 import Navi from "./Navi";
 import "./App.css";
 import AccountHistory from "./AccountHistory";
@@ -22,15 +20,12 @@ function App() {
          <Navi />
         <Switch>
               <PrivateRoute exact path="/" component={Dashboard} />
-              <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <PrivateRoute path="/deposit" component={Deposit} />
               <PrivateRoute path="/withdraw" component={Withdraw} />
               <PrivateRoute path="/accountHistory" component={AccountHistory} />
-              <PrivateRoute path="/test" component={TransactionTable} />
 
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
-              <Route path="/forgot-password" component={ForgotPassword} />
         </Switch>
        </AuthProvider>
     </Router>
