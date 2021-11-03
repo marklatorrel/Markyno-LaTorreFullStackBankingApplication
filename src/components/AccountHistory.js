@@ -6,11 +6,10 @@ import styles from "./AccountHistory.module.css";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
-  const { user, getUserInfo,getUserAccount } = useAuth();
+  const { user, getUserInfo } = useAuth();
 
   useEffect(() => {
     getUserInfo();
-    //getUserAccount();
   }, []);
 
   return (
